@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+  if students.length > 0
+    table
+      thead
+        tr
+          th Name
+          th Roll No
+          th Email
+          th Course
+          th Actions
+      tbody
+        each student in students
+          tr
+            td= student.name
+            td= student.rollNumber
+            td= student.email
+            td= student.course
+            td
+              a.btn.btn-warning(href=`/edit/${student._id}`) Edit
+              |  
+              form(action=`/delete/${student._id}`, method="POST", style="display:inline")
+                button.btn.btn-danger(type="submit", onclick="return confirm('Are you sure?')") Delete
+  else
+    p No students found. Add some!
